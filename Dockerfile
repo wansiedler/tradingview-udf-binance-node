@@ -1,5 +1,5 @@
-FROM node:12.0
-WORKDIR /usr/src/app
+FROM node:current-slim
+WORKDIR /var/www
 COPY package.json package-lock.json ./
 RUN npm install
 COPY src ./

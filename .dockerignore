@@ -1,0 +1,17 @@
+venv
+.venv
+node_modules
+.git
+.idea
+.gitattributes
+.gitignore
+*.pid
+.env
+.md
+.yml
+.git
+README.md
+Dockerfile.debian
+Dockerfile
+Dockerfile.alpine
+
