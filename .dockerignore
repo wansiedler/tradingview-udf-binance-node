@@ -15,3 +15,7 @@ Dockerfile.debian
 Dockerfile
 Dockerfile.alpine
 
+
+
+# Ignore devspace.yaml file to prevent image rebuilding after config changes
+devspace.yaml

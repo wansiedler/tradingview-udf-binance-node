@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cryptoman-binanceudf
+  namespace: cryptoman
+  labels:
+    app: cryptoman-binanceudf
+spec:
+  type: NodePort
+  # type: ClusterIP
+  ports:
+  - name: cryptoman-binanceudf
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: cryptoman-binanceudf
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cryptoman-binanceudf
+  namespace: cryptoman
+  labels:
+    app: cryptoman-binanceudf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cryptoman-binanceudf
+  template:
+    metadata:
+      labels:
+        app: cryptoman-binanceudf
+    spec:
+      imagePullSecrets:
+      - name: myregistrykey
+      containers:
+      - name: cryptoman-binanceudf
+        image: eu.gcr.io/my-projectjwmt7xk/tradingviewudfbinancenode
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: cryptoman-config
+        ports:
+        - name: http
+          containerPort: 80

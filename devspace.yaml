@@ -1,0 +1,58 @@
+version: v1beta9
+images:
+  app:
+    image: eu.gcr.io/my-projectjwmt7xk/tradingviewudfbinancenode
+    dockerfile: Dockerfile
+    preferSyncOverRebuild: true
+    injectRestartHelper: true
+    appendDockerfileInstructions:
+    - USER root
+deployments:
+- name: tradingview-udf-binance-node
+  namespace: cryptoman
+  helm:
+    componentChart: true
+    values:
+      containers:
+      - image: eu.gcr.io/my-projectjwmt7xk/tradingviewudfbinancenode
+        env:
+        - name: PORT
+          value: "3000"
+      service:
+        type: NodePort
+        ports:
+        - port: 3000
+dev:
+  ports:
+  - imageName: app
+    forward:
+    - port: 3000
+  open:
+  - url: http://localhost:3000
+  sync:
+  - imageName: app
+    excludePaths:
+    - .git/
+    uploadExcludePaths:
+    - venv
+    - .venv
+    - node_modules
+    - .idea
+    - '*.pid'
+    - .env
+    - .md
+    - .yml
+    - README.md
+    - Dockerfile.debian
+    - Dockerfile
+    - Dockerfile.alpine
+    - devspace.yaml
+    onUpload:
+      restartContainer: true
+profiles:
+- name: production
+  patches:
+  - op: remove
+    path: images.app.injectRestartHelper
+  - op: remove
+    path: images.app.appendDockerfileInstructions
