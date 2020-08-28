@@ -19,9 +19,7 @@ script:
   - docker build -t eu.gcr.io/$GCP_PROJECT_ID/cryptoman-binanceudf:$COMMIT_SHA -t eu.gcr.io/$GCP_PROJECT_ID/cryptoman-binanceudf:latest --file Dockerfile .
   - docker push eu.gcr.io/$GCP_PROJECT_ID/cryptoman-binanceudf:$COMMIT_SHA
   - docker push eu.gcr.io/$GCP_PROJECT_ID/cryptoman-binanceudf:latest
-  - kubectl apply -f cryptoman-binanceudf-service-k8s.yaml
   - kubectl apply -f cryptoman-binanceudf-k8s.yaml
-  - kubectl apply -f cryptoman-binanceudf-jobs-k8s.yaml
   - kubectl set image deployment/cryptoman-binanceudf --namespace cryptoman cryptoman-binanceudf=eu.gcr.io/$GCP_PROJECT_ID/cryptoman-binanceudf:$COMMIT_SHA
 
 #script:
