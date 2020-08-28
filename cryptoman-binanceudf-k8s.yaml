@@ -37,7 +37,7 @@ spec:
       - name: myregistrykey
       containers:
       - name: cryptoman-binanceudf
-        image: eu.gcr.io/my-projectjwmt7xk/tradingviewudfbinancenode
+        image: eu.gcr.io/my-projectjwmt7xk/cryptoman-binanceudf
         imagePullPolicy: Always
         envFrom:
         - configMapRef:
