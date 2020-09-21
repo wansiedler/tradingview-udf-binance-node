@@ -1,7 +1,7 @@
 version: v1beta9
 images:
   app:
-    image: eu.gcr.io/my-projectjwmt7xk/tradingviewudfbinancenode
+    image: eu.gcr.io/my-projectjwmt7xk/tradingview-udf-binance-node
     dockerfile: Dockerfile
     preferSyncOverRebuild: true
     injectRestartHelper: true
@@ -14,7 +14,7 @@ deployments:
     componentChart: true
     values:
       containers:
-      - image: eu.gcr.io/my-projectjwmt7xk/tradingviewudfbinancenode
+      - image: eu.gcr.io/my-projectjwmt7xk/tradingview-udf-binance-node
         env:
         - name: PORT
           value: "3000"
